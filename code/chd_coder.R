@@ -6,7 +6,7 @@
 
 # This is to be used at the collector level. When the indicator table has
 # been generated. 
-library(translate)
+# library(translate)
 
 chdCoder <- function(df = indicator, iso3 = NULL, foreign = F, from = "es", gen = NULL, top = NULL) {
     # Sanity checks.

@@ -39,16 +39,25 @@ value$Indicator <- ifelse(value$Accumulative == 'YES', paste(value$Indicator, "(
 value$Accumulative <- NULL
 
 # adding names
-names(value) <- c('indID', 'region', 'value', 'period')
+names(value) <- c('name', 'region', 'value', 'period')
 value$dsID <- 'ocha-ors'
 value$source <- 'http://ors.ocharowca.info/Anonymous/AllDataFeed.ashx'
 value$is_number <- 1
 
 # indicator table
-indicator <- data.frame(indID = NA, name = unique(value$indID), units = NA)
+indicator <- data.frame(indID = NA, name = unique(value$name), units = NA)
 indicator <- chdCoder(iso3 = "REG", gen = "O")
+
+# adding indID to the value table
+value <- merge(value, indicator, all.x = T)
+value$units <- NULL  # cleaning
 
 # storing raw data in db
 writeTables(df = indicator, table_name = 'indicator', db = 'scraperwiki')
 writeTables(df = dataset, table_name = 'dataset', db = 'scraperwiki')
 writeTables(df = value, table_name = 'value', db = 'scraperwiki')
+
+# storing raw data in csv files
+write.csv(indicator, 'data/indicator.csv', row.names = F)
+write.csv(dataset, 'data/dataset.csv', row.names = F)
+write.csv(value, 'data/value.csv', row.names = F)
