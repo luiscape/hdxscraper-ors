@@ -51,6 +51,7 @@ indicator <- chdCoder(iso3 = "REG", gen = "O")
 # adding indID to the value table
 value <- merge(value, indicator, all.x = T)
 value$units <- NULL  # cleaning
+value$name <- NULL  # cleaning
 
 # storing raw data in db
 writeTables(df = indicator, table_name = 'indicator', db = 'scraperwiki')
