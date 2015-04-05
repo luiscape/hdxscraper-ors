@@ -13,23 +13,27 @@ The tool hosts all project data as submitted by partners during the SRP process 
 
 Data Summary
 ------------
-ORS provides an XML feed with the 'tables' used in their system. The feed is available [here](http://ors.ocharowca.info/Anonymous/AllDataFeed.ashx).
+To run scraper, do:
+```bash
+$ bash code/run.sh
+```
 
-Here is a brief summary:
+Or using Python:
+```bash
+$ python code/scraper.py
+```
 
-- The data comes from a XML feed. Reportedly, the feed is a real-time feed.
-- I created a scraper using ScraperWiki that collects the data out of that feed every day at midnight (GMT).
-- The periodicity of the data is monthly.
-- They monitor 160 indicators, all based on a pre-determined "Annual Target" and the currently "Achieved" at the time of reporting.
-- They have data from 15 organizations that are part of 6 clusters.
-- They have data about 5 countries (Burkina Faso, Gambia, Mali, Mauritania, and Senegal).
-- Some indicators have data that go up to admin 1 levels. There are 41 admin 1 levels covered.
+API Documentation
+-----------------
+ORS has an undocumented API. The following endpoints can be used as a guidance.
 
-
-![Country distribution of the data in HDX.](plots/country_plot.png)
-
-The time periodicity would be months in the reports generated. Here is the breakdown:
-
-![Month distribution of the data.](plots/month_plot.png)
-
-The table contains **160** indicators. The list of indicators is available [here](data/indicator.csv).
+ * All reported data http://ors.ocharowca.info/DataFeeds/ReportedData.ashx?project=&country=&subcluster=&cluster=&org=&obj=&act=&ind=&month=&admin1=&lng=
+ * Validated reported data only http://ors.ocharowca.info/Anonymous/allvalidateddatafeed.ashx?country=&cluster=&org=&month=&project=&ops=&lng=
+ * Country Framework http://ors.ocharowca.info/datafeeds/indicators.ashx?country=&cluster=&obj=&act=&ind=
+ * Country Framework with targets http://ors.ocharowca.info/datafeeds/frameworktargets.ashx?country=&cluster=&obj=&act=&admin1=
+ * OPS Projects http://ors.ocharowca.info/datafeeds/projects.ashx?project=&country=&subcluster=&cluster=&org=&lng=
+ * OPS Projects targets http://ors.ocharowca.info/DataFeeds/projectsrptargets.ashx?project=&country=&subcluster=&cluster=&org=&act=&ind=&status=&tloc=&lng=
+ * Cluster Indicators http://ors.ocharowca.info/datafeeds/clusterindicator.ashx?country=&cluster=
+- List of Organization with ID http://ors.ocharowca.info/datafeeds/organizations.ashx
+ * List of Cluster ID http://ors.ocharowca.info/datafeeds/clusters.ashx
+ * List of Country http://ors.ocharowca.info/datafeeds/country.ashx

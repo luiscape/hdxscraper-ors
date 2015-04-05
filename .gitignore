@@ -1,1 +1,3 @@
 .Rhistory
+venv/*
+venv/**

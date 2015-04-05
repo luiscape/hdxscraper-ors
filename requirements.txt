@@ -1,0 +1,4 @@
+scraperwiki
+ckanapi
+requests
+termcolor

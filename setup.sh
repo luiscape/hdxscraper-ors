@@ -1,6 +1,11 @@
-cd ..
-rm -rf -- tool
-mv hdxscraper-ors tool
+#!/bin/bash
+
+printf "Installing Python's virtual environment.\n"
+virtualenv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+pip install requests[security]
+
+printf "Installing crontab.\n"
 crontab -l | { cat; echo "@daily bash tool/run.sh"; } | crontab -
-printf "Now install the packages XML and sqldf in R.\n"
-R

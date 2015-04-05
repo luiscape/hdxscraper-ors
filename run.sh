@@ -1,4 +1,8 @@
-Rscript code/scraper.R
-mv scraperwiki.sqlite ../
-zip -r data/ocha-ors.zip data/indicator.csv data/value.csv data/dataset.csv
-mv data/ocha-ors.zip http/csv.zip
+#!/bin/bash
+
+# for now, this:
+rm scraperwiki.sqlite
+
+source venv/bin/activate
+python tool/code/scraper.py
+
