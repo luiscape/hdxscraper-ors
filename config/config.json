@@ -1,0 +1,17 @@
+[
+  {
+    "name": "All data",
+    "url": "http://ors.ocharowca.info/anonymous/alldatafeed.ashx?format=json",
+    "table_name": "ors_all_data"
+  },
+  {
+    "name": "Countries",
+    "url": "http://ors.ocharowca.info/datafeeds/country.ashx?format=json",
+    "talbe_name": ""
+  },
+  {
+    "name": "Clusters",
+    "url": "http://ors.ocharowca.info/datafeeds/clusters.ashx?format=json",
+    "table_name": ""
+  }
+]
