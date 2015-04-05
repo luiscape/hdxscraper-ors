@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import io
 import sys
 import csv
 import json
@@ -28,19 +27,11 @@ def FetchData():
 
   return json
 
-def ProcessRecords(data, make_csv = False, store_db = True):
-  if make_csv:
-    c_path = os.path.join(dir, 'data/') + 'data.csv'
-    f = csv.writer(io.open(c_path, "wb"))
-    f.writerow(data[0].keys())
+def ProcessRecords(data):
 
-    for row in data:
-      f.writerow([ row[key] if isinstance(row[key], dict) is False else row[key].values()[0] for key in row.keys() ])
-
-  if store_db:
-    for row in data:
-      record = [{ key:row[key] if isinstance(row[key], dict) is False else row[key].values()[0] for key in row.keys() }]
-      StoreRecords(record, "ors_all_data")
+  for row in data:
+    record = [{ key:row[key] if isinstance(row[key], dict) is False else row[key].values()[0] for key in row.keys() }]
+    StoreRecords(record, "ors_all_data")
 
 
 def Main():
