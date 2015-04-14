@@ -4,10 +4,12 @@ printf "Installing Python's virtual environment and security add-on.\n"
 virtualenv venv
 source venv/bin/activate
 
+cd tool
+
 pip install -r requirements.txt
 pip install requests[security]
 
-printf "Setting-up database."
+printf "Setting-up database.\n"
 python setup.py
 
 printf "Installing crontab.\n"
