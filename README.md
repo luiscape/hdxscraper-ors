@@ -11,7 +11,7 @@ The tool hosts all project data as submitted by partners during the SRP process 
 
 
 
-Data Summary
+Usage
 ------------
 To run scraper, do:
 ```bash
@@ -23,17 +23,11 @@ Or using Python:
 $ python code/scraper.py
 ```
 
-API Documentation
------------------
-ORS has an undocumented API. The following endpoints can be used as a guidance.
 
- * All reported data http://ors.ocharowca.info/DataFeeds/ReportedData.ashx?project=&country=&subcluster=&cluster=&org=&obj=&act=&ind=&month=&admin1=&lng=
- * Validated reported data only http://ors.ocharowca.info/Anonymous/allvalidateddatafeed.ashx?country=&cluster=&org=&month=&project=&ops=&lng=
- * Country Framework http://ors.ocharowca.info/datafeeds/indicators.ashx?country=&cluster=&obj=&act=&ind=
- * Country Framework with targets http://ors.ocharowca.info/datafeeds/frameworktargets.ashx?country=&cluster=&obj=&act=&admin1=
- * OPS Projects http://ors.ocharowca.info/datafeeds/projects.ashx?project=&country=&subcluster=&cluster=&org=&lng=
- * OPS Projects targets http://ors.ocharowca.info/DataFeeds/projectsrptargets.ashx?project=&country=&subcluster=&cluster=&org=&act=&ind=&status=&tloc=&lng=
- * Cluster Indicators http://ors.ocharowca.info/datafeeds/clusterindicator.ashx?country=&cluster=
-- List of Organization with ID http://ors.ocharowca.info/datafeeds/organizations.ashx
- * List of Cluster ID http://ors.ocharowca.info/datafeeds/clusters.ashx
- * List of Country http://ors.ocharowca.info/datafeeds/country.ashx
+Installation
+------------
+The scraper was designed to be used in `ScraperWiki`. Run the `setup.sh` bash script to install dependencies and setup the database:
+
+```shell
+$ bash setup.sh
+```
