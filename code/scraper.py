@@ -7,7 +7,7 @@ import csv
 import json
 import requests
 import scraperwiki
-# import config as Config
+import config as Config
 from hdx_format import item
 from termcolor import colored as color
 from store_records import StoreRecords
@@ -15,6 +15,8 @@ from store_records import StoreRecords
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
 def FetchData(endpoint):
+  '''Fetch data from specific endpoint.'''
+
   u = endpoint["url"]
   r = requests.get(u)
 
@@ -27,18 +29,19 @@ def FetchData(endpoint):
 
   return json
 
-def ProcessRecords(data):
 
-  for row in data:
-    record = [{ key:row[key] if isinstance(row[key], dict) is False else row[key].values()[0] for key in row.keys() }]
-    StoreRecords(record, endpoint["table_name"])
+def ProcessRecords(data, endpoint):
+  '''Process and store data in database.'''
+
+  StoreRecords(data=data, table=endpoint["table_name"])
 
 
 def Main():
-  endpoints = Config.LoadEndpoints()
+  '''Wrapper.'''
+  endpoints = Config.LoadConfig()
   for endpoint in endpoints:
     json = FetchData(endpoint)
-    ProcessRecords(data=json)
+    ProcessRecords(data=json, endpoint=endpoint)
 
 if __name__ == '__main__':
   Main()
