@@ -13,7 +13,7 @@ The tool hosts all project data as submitted by partners during the SRP process 
 
 Usage
 ------------
-To run scraper, do:
+To run the scraper, do:
 ```bash
 $ bash code/run.sh
 ```
@@ -26,7 +26,7 @@ $ python code/scraper.py
 
 Installation
 ------------
-The scraper was designed to be used in `ScraperWiki`. Run the `setup.sh` bash script to install dependencies and setup the database:
+The scraper was designed to be used in `ScraperWiki`. Run the `setup.sh` script to install dependencies and setup the database:
 
 ```shell
 $ bash setup.sh
