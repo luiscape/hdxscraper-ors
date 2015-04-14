@@ -76,7 +76,7 @@
     "name": "PRJ",
     "long_name": "OPS Projects",
     "url": "http://ors.ocharowca.info/datafeeds/projects.ashx?project=&country=&subcluster=&cluster=&org=&lng=&format=json",
-    "table_name": "org_prj",
+    "table_name": "ors_prj",
     "table_schema": [
       "ProjectId",
       "ProjectCode",
@@ -119,7 +119,7 @@
     "name": "PRJTRG",
     "long_name": "OPS Projects with Targets",
     "url": "http://ors.ocharowca.info/DataFeeds/projectsrptargets.ashx?project=&country=&subcluster=&cluster=&org=&act=&ind=&status=&tloc=&lng=&format=json",
-    "table_name": "org_prjtrg",
+    "table_name": "ors_prjtrg",
     "table_schema": [
       "ProjectId",
       "ProjectCode",
@@ -201,7 +201,7 @@
     "name": "dORG",
     "long_name": "List of Organizations",
     "url": "http://ors.ocharowca.info/datafeeds/organizations.ashx?format=json",
-    "table_name": "org_organizations",
+    "table_name": "ors_organizations",
     "table_schema": [
       "OrganizationId",
       "OrganizationName",
