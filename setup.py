@@ -5,7 +5,8 @@ import os
 import sys
 import scraperwiki
 
-sys.path.append('./code')
+dir = os.path.split(os.path.realpath(__file__))[0]
+sys.path.append(os.path.join(dir, 'code'))
 
 import config as Config
 from hdx_format import item

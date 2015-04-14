@@ -9,14 +9,12 @@ import requests
 import scraperwiki
 import config as Config
 from hdx_format import item
-from termcolor import colored as color
 from store_records import StoreRecords
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
 def FetchData(endpoint):
   '''Fetch data from specific endpoint.'''
-
   u = endpoint["url"]
   r = requests.get(u)
 
@@ -32,7 +30,6 @@ def FetchData(endpoint):
 
 def ProcessRecords(data, endpoint):
   '''Process and store data in database.'''
-
   StoreRecords(data=data, table=endpoint["table_name"])
 
 
@@ -42,6 +39,7 @@ def Main():
   for endpoint in endpoints:
     json = FetchData(endpoint)
     ProcessRecords(data=json, endpoint=endpoint)
+
 
 if __name__ == '__main__':
   Main()
