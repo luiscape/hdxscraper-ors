@@ -1,0 +1,39 @@
+[
+  {
+    "resource_id": "68788137-84d6-4e9d-87f1-f23f71ec705f",
+    "schema": {
+      "fields": [
+      {"id": "ClusterIndicatorId", "type": "text"},
+      {"id": "Country", "type": "text"},
+      {"id": "Cluster", "type": "text"},
+      {"id": "Indicator", "type": "text"},
+      {"id": "Unit", "type": "text"},
+      {"id": "Month", "type": "text"},
+      {"id": "OriginalTarget", "type": "text"},
+      {"id": "CurrentTarget", "type": "text"},
+      {"id": "MonthlyAchieved", "type": "text"},
+      {"id": "FinalSum", "type": "text"},
+      {"id": "EmergencyLocationId", "type": "text"},
+      {"id": "IsRegional", "type": "text"},
+      {"id": "IsSRP", "type": "text"},
+      {"id": "CreatedBy", "type": "text"},
+      {"id": "CreatedDate", "type": "text"},
+      {"id": "UpdatedBy", "type": "text"},
+      {"id": "UpdatedDate", "type": "text"},
+      {"id": "CountryId", "type": "text"},
+      {"id": "ClusterId", "type": "text"},
+      {"id": "MonthId", "type": "text"}
+      ]
+    },
+    "indexes": ["ClusterIndicatorId", "Country", "Indicator"]
+  },
+  {
+    "resource_id": "",
+    "schema": {
+      "fields": [
+
+      ]
+    },
+    "indexes": []
+  }
+]

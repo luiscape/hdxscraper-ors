@@ -12,5 +12,5 @@ pip install requests[security]
 printf "Setting-up database.\n"
 python setup.py
 
-printf "Installing crontab.\n"
-crontab -l | { cat; echo "@daily bash tool/run.sh"; } | crontab -
+# printf "Installing crontab.\n"
+# crontab -l | { cat; echo "@daily bash tool/run.sh"; } | crontab -
