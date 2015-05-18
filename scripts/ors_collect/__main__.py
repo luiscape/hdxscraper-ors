@@ -9,11 +9,14 @@ sys.path.append(dir)
 
 from utilities.hdx_format import item
 from ors_collect import collect as Collect
+from ors_collect import patch as Patch
 
-Collect.Main()
 
+if __name__ == '__main__':
 
-# if __name__ == '__main__':
+  Collect.Main()
+  Patch.Main()
+
 
 #   try:
 #       Main()
