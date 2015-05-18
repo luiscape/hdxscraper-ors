@@ -43,8 +43,8 @@
     "table_name": "ors_frwtrg",
     "pii_columns": [],
     "dates_formatting": {
-        "type": null,
-        "fields": []
+        "type": "epoch",
+        "fields": ["CreatedDate"]
     },
     "table_schema": [
         "Country",
@@ -84,7 +84,7 @@
     "long_name": "OPS Projects",
     "url": "http://ors.ocharowca.info/datafeeds/projects.ashx?project=&country=&subcluster=&cluster=&org=&lng=&format=json",
     "table_name": "ors_prj",
-    "pii_columns": [],
+    "pii_columns": ["ProjectContactName", "ProjectContactEmail", "ProjectContactPhone"],
     "dates_formatting": {
         "type": "epoch",
         "fields": ["ProjectStartDate", "ProjectEndDate"]
@@ -131,10 +131,10 @@
     "long_name": "OPS Projects with Targets",
     "url": "http://ors.ocharowca.info/DataFeeds/projectsrptargets.ashx?project=&country=&subcluster=&cluster=&org=&act=&ind=&status=&tloc=&lng=&format=json",
     "table_name": "ors_prjtrg",
-    "pii_columns": [],
+    "pii_columns": ["ProjectContactName", "ProjectContactEmail", "ProjectContactPhone"],
     "dates_formatting": {
-        "type": null,
-        "fields": []
+        "type": "epoch",
+        "fields": ["ProjectStartDate", "ProjectEndDate"]
     },
     "table_schema": [
         "ProjectId",
@@ -375,7 +375,7 @@
     "long_name": "Humanitarian Response Key Figures",
     "url": "http://ors.ocharowca.info/datafeeds/keyfiguresfeed.ashx?country=&final=&lng=&format=json",
     "table_name": "ors_key_figures",
-    "pii_columns": [],
+    "pii_columns": ["UpdatedBy"],
     "dates_formatting": {
         "type": null,
         "fields": []
