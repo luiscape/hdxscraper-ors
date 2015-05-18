@@ -17,10 +17,6 @@ dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 def StoreRecords(data, table, verbose=False, db_lock_patch=True):
   '''Store records in a ScraperWiki database.'''
 
-  if db_lock_patch:
-    print '%s Waiting for database to unlock (10 seconds).' % item('prompt_bullet')
-    time.sleep(10)
-
   schemas = Config.LoadConfig()
   table_names = []
   for schema in schemas:
@@ -38,6 +34,13 @@ def StoreRecords(data, table, verbose=False, db_lock_patch=True):
       delete_statement = "DELETE FROM %s" % table
       scraperwiki.sqlite.execute(delete_statement)
       print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
+      
+      #
+      # Waiting to unlock database.
+      #
+      if db_lock_patch:
+        print '%s Waiting for database to unlock (3 seconds).' % item('prompt_bullet')
+        time.sleep(3)
 
       scraperwiki.sqlite.save(schema, data, table_name=table)
       print "%s Storing record %s in database." % (item('prompt_bullet').decode('utf-8'), len(data))
