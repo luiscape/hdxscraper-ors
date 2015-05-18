@@ -25,6 +25,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
   sql = 'select * from %s' % table_name
   try:
     result_proxy = scraperwiki.sqlite.execute(sql)['data']
+    scraperwiki.sqlite.commit()
     data = []
     for row in result_proxy:
       data.append(dict(row.items()))

@@ -14,7 +14,7 @@ from utilities.hdx_format import item
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
-def StoreRecords(data, table, verbose=False, db_lock_time=3):
+def StoreRecords(data, table, verbose=False, db_lock_time=None):
   '''Store records in a ScraperWiki database.'''
 
   schemas = Config.LoadConfig()
@@ -32,6 +32,7 @@ def StoreRecords(data, table, verbose=False, db_lock_time=3):
     if table in tables.keys():
       old_records = scraperwiki.sqlite.execute("SELECT count(*) from %s" % table)["data"][0][0]
       delete_statement = "DELETE FROM %s" % table
+      scraperwiki.sqlite.commit()
       
       #
       # Waiting to unlock database.
@@ -41,6 +42,7 @@ def StoreRecords(data, table, verbose=False, db_lock_time=3):
         time.sleep(db_lock_time)
 
       scraperwiki.sqlite.execute(delete_statement)
+      scraperwiki.sqlite.commit()
       print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
       
       #
