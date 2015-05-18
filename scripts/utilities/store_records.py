@@ -3,6 +3,7 @@
 
 import os
 import sys
+import time
 import scraperwiki
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
