@@ -24,8 +24,6 @@ def Main(patch=True):
   # Patch.
   #
   if patch:
-    print '%s Waiting for database to unlock (10 seconds).' % item('prompt_bullet')
-    time.sleep(10)
     Patch.Main()
 
 if __name__ == '__main__':

@@ -13,8 +13,12 @@ from utilities.hdx_format import item
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
-def StoreRecords(data, table, verbose = False):
+def StoreRecords(data, table, verbose=False, db_lock_patch=True):
   '''Store records in a ScraperWiki database.'''
+
+  if db_lock_patch:
+    print '%s Waiting for database to unlock (10 seconds).' % item('prompt_bullet')
+    time.sleep(10)
 
   schemas = Config.LoadConfig()
   table_names = []
