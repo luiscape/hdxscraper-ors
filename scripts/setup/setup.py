@@ -5,11 +5,11 @@ import os
 import sys
 import scraperwiki
 
-dir = os.path.split(os.path.realpath(__file__))[0]
-sys.path.append(os.path.join(dir, 'code'))
+dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+sys.path.append(dir)
 
-import config as Config
-from hdx_format import item
+from config import config as Config
+from utilities.hdx_format import item
 
 
 def CreateTables():
@@ -36,7 +36,3 @@ def CreateTables():
 
   print "%s Database created successfully." % item('prompt_success')
   return True
-
-
-if __name__ == '__main__':
-  CreateTables()

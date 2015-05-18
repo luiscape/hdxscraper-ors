@@ -4,15 +4,19 @@
 import os
 import sys
 import scraperwiki
-import config as Config
-from hdx_format import item
+
+dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+sys.path.append(dir)
+
+from config import config as Config
+from utilities.hdx_format import item
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
 def StoreRecords(data, table, verbose = False):
   '''Store records in a ScraperWiki database.'''
 
-  schemas = Config.LoadConfig(os.path.join(dir, "config/config.json"))
+  schemas = Config.LoadConfig()
   table_names = []
   for schema in schemas:
     table_names.append(schema["table_name"])
@@ -28,10 +32,10 @@ def StoreRecords(data, table, verbose = False):
       old_records = scraperwiki.sqlite.execute("SELECT count(*) from %s" % table)["data"][0][0]
       delete_statement = "DELETE FROM %s" % table
       scraperwiki.sqlite.execute(delete_statement)
-      print " Cleaning %s records from database table: %s" % (old_records, table)
+      print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
 
       scraperwiki.sqlite.save(schema, data, table_name=table)
-      print " Storing record %s in database." % len(data)
+      print "%s Storing record %s in database." % (item('prompt_bullet').decode('utf-8'), len(data))
 
 
   # Before storing check that the record exists in database.

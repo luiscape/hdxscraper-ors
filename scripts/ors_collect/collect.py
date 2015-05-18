@@ -3,13 +3,17 @@
 
 import os
 import sys
+
+dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+sys.path.append(dir)
+
 import csv
 import json
 import requests
 import scraperwiki
-import config as Config
-from hdx_format import item
-from store_records import StoreRecords
+from config import config as Config
+from utilities.hdx_format import item
+from utilities.store_records import StoreRecords
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
@@ -39,17 +43,3 @@ def Main():
   for endpoint in endpoints:
     json = FetchData(endpoint)
     ProcessRecords(data=json, endpoint=endpoint)
-
-
-
-if __name__ == '__main__':
-
-  try:
-      Main()
-      print "SW Status: Everything seems to be just fine."
-      scraperwiki.status('ok')
-
-  except Exception as e:
-      print e
-      scraperwiki.status('error', 'Error collecting data.')
-      os.system("echo https://ds-ec2.scraperwiki.com/3zarzzv/0zftw6fzkjxommp/http/log.txt | mail -s 'ORS APIs: Failed collecting data.' luiscape@gmail.com")

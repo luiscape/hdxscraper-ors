@@ -10,7 +10,7 @@ pip install -r requirements.txt
 pip install requests[security]
 
 printf "Setting-up database.\n"
-python setup.py
+python scripts/setup/
 
 # printf "Installing crontab.\n"
 # crontab -l | { cat; echo "@daily bash tool/run.sh"; } | crontab -
