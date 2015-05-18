@@ -19,7 +19,7 @@ def Main(patch=True):
   #
   # Collect data.
   #
-  Collect.Main()
+  # Collect.Main()
 
   #
   # Patch.

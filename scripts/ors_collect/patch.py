@@ -44,24 +44,26 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
     #
     # Seeing if the regex works.
     #
-    if d is not None:
+    if d != None:
       try:
         convent_date = int(d[d.find("(")+1:d.find(")")])
 
       except Exception as e:
         print '%s Regex did not quite work on table `%s`. Aborting.' % (item('prompt_warn'), table_name)
-        if verbose: 
+        if verbose:
           print e
         return False
     
-    else:
-      epoch = convent_date / 1000
-      dt = datetime.datetime.utcfromtimestamp(epoch)
-      iso_format = dt.isoformat()
-      if verbose:
-        print '%s Date: %s' % (item('prompt_bullet'), iso_format)
+    #
+    # Making transformations.
+    #
+    epoch = convent_date / 1000
+    dt = datetime.datetime.utcfromtimestamp(epoch)
+    iso_format = dt.isoformat()
+    if verbose:
+      print '%s Date: %s' % (item('prompt_bullet'), iso_format)
 
-      date[column_name] = iso_format
+    date[column_name] = iso_format
 
   #
   # Return data.
