@@ -30,9 +30,8 @@ def StoreRecords(data, table, verbose=False, db_lock_time=None):
     tables = scraperwiki.sqlite.show_tables()
 
     if table in tables.keys():
-      old_records = scraperwiki.sqlite.execute("SELECT count(*) from %s" % table)["data"][0][0]
+      old_records = scraperwiki.sqlite.execute("select count(*) from %s" % table)["data"][0][0]
       delete_statement = "DELETE FROM %s" % table
-      scraperwiki.sqlite.commit()
       
       #
       # Waiting to unlock database.
@@ -42,7 +41,6 @@ def StoreRecords(data, table, verbose=False, db_lock_time=None):
         time.sleep(db_lock_time)
 
       scraperwiki.sqlite.execute(delete_statement)
-      scraperwiki.sqlite.commit()
       print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
       
       #
