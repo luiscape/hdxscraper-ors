@@ -31,6 +31,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
 
   except Exception as e:
     print '%s Could not collect data from database.' % item('prompt_error')
+    return False
     if verbose:
       print e
   
