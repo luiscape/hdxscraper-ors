@@ -14,7 +14,7 @@ from utilities.hdx_format import item
 
 dir = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
-def StoreRecords(data, table, verbose=False, db_lock_patch=True):
+def StoreRecords(data, table, verbose=False, db_lock_time=3):
   '''Store records in a ScraperWiki database.'''
 
   schemas = Config.LoadConfig()
@@ -32,15 +32,23 @@ def StoreRecords(data, table, verbose=False, db_lock_patch=True):
     if table in tables.keys():
       old_records = scraperwiki.sqlite.execute("SELECT count(*) from %s" % table)["data"][0][0]
       delete_statement = "DELETE FROM %s" % table
+      
+      #
+      # Waiting to unlock database.
+      #
+      if db_lock_time:
+        print '%s Waiting for database to unlock (%s seconds).' % (item('prompt_bullet'), db_lock_time)
+        time.sleep(db_lock_time)
+
       scraperwiki.sqlite.execute(delete_statement)
       print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
       
       #
       # Waiting to unlock database.
       #
-      if db_lock_patch:
-        print '%s Waiting for database to unlock (3 seconds).' % item('prompt_bullet')
-        time.sleep(3)
+      if db_lock_time:
+        print '%s Waiting for database to unlock (%s seconds).' % (item('prompt_bullet'), db_lock_time)
+        time.sleep(db_lock_time)
 
       scraperwiki.sqlite.save(schema, data, table_name=table)
       print "%s Storing record %s in database." % (item('prompt_bullet').decode('utf-8'), len(data))
