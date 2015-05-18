@@ -43,3 +43,7 @@ def Main():
   for endpoint in endpoints:
     json = FetchData(endpoint)
     ProcessRecords(data=json, endpoint=endpoint)
+
+
+if __name__ == '__main__':
+  Main()
