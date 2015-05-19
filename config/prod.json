@@ -3,7 +3,7 @@
     "long_name": "Country Framework",
     "url": "http://ors.ocharowca.info/datafeeds/indicators.ashx?country=&cluster=&obj=&act=&ind=&format=json",
     "table_name": "ors_frw",
-    "pii_columns": [],
+    "pii_columns": ["CreatedBy"],
     "dates_formatting": {
         "type": "epoch",
         "fields": ["CreatedDate"]
@@ -319,10 +319,10 @@
     "long_name": "Cluster output indicator Reports",
     "url": "http://ors.ocharowca.info/datafeeds/clusterindicatorreports.ashx?country=&cluster=&month=&lng=&regional=&format=json",
     "table_name": "ors_clindrpt",
-    "pii_columns": [],
+    "pii_columns": ["CreatedBy"],
     "dates_formatting": {
-        "type": null,
-        "fields": []
+        "type": "month-day-year",
+        "fields": ["CreatedDate"]
     },
     "table_schema": [
         "ClusterIndicatorId",
@@ -377,8 +377,8 @@
     "table_name": "ors_key_figures",
     "pii_columns": ["UpdatedBy"],
     "dates_formatting": {
-        "type": null,
-        "fields": []
+        "type": "day-month-year",
+        "fields": ["UpdatedDate"]
     },
     "table_schema": [
         "CountryId",
