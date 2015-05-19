@@ -138,20 +138,20 @@ def Main(verbose=True):
     for field in endpoint['pii_columns']:
       DeletePIIColumns(table_name=endpoint['table_name'], column_name=field)
 
-    # #
-    # # Check the type of date conversion.
-    # #
-    # if endpoint['dates_formatting']['type'] == 'epoch':
-    #   #
-    #   # Iterate over every field.
-    #   #
-    #   for field in endpoint['dates_formatting']['fields']:
-    #     data = ConvertEpochDates(endpoint['table_name'], column_name=field)
-    #     #
-    #     # Store data in database.
-    #     #
-    #     if data is not False:
-    #       StoreRecords(data=data, table=endpoint['table_name'])
+    #
+    # Check the type of date conversion.
+    #
+    if endpoint['dates_formatting']['type'] == 'epoch':
+      #
+      # Iterate over every field.
+      #
+      for field in endpoint['dates_formatting']['fields']:
+        data = ConvertEpochDates(endpoint['table_name'], column_name=field)
+        #
+        # Store data in database.
+        #
+        if data is not False:
+          StoreRecords(data=data, table=endpoint['table_name'])
 
 
 
