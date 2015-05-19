@@ -192,7 +192,7 @@
     "long_name": "Cluster Indicators (output indicators)",
     "url": "http://ors.ocharowca.info/datafeeds/clusterindicator.ashx?country=&cluster=&format=json",
     "table_name": "ors_clind",
-    "pii_columns": [],
+    "pii_columns": ["CreatedBy"],
     "dates_formatting": {
         "type": "epoch",
         "fields": ["CreatedDate"]
