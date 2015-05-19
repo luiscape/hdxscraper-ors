@@ -19,7 +19,7 @@ def Main(patch=True):
   #
   # Collect data.
   #
-  # Collect.Main()
+  Collect.Main()
 
   #
   # Patch.
@@ -28,14 +28,14 @@ def Main(patch=True):
     Patch.Main()
 
 if __name__ == '__main__':
-  # Main()
+  Main()
 
-  try:
-      Main()
-      print "SW Status: Everything seems to be just fine."
-      scraperwiki.status('ok')
+  # try:
+  #     Main()
+  #     print "SW Status: Everything seems to be just fine."
+  #     scraperwiki.status('ok')
 
-  except Exception as e:
-      print e
-      scraperwiki.status('error', 'Error collecting data.')
-      os.system("echo https://ds-ec2.scraperwiki.com/3zarzzv/0zftw6fzkjxommp/http/log.txt | mail -s 'ORS APIs: Failed collecting data.' luiscape@gmail.com")
+  # except Exception as e:
+  #     print e
+  #     scraperwiki.status('error', 'Error collecting data.')
+  #     os.system("echo https://ds-ec2.scraperwiki.com/3zarzzv/0zftw6fzkjxommp/http/log.txt | mail -s 'ORS APIs: Failed collecting data.' luiscape@gmail.com")

@@ -94,18 +94,20 @@ def DeletePIIColumns(table_name, column_name, verbose=True):
   # From: http://stackoverflow.com/questions/10660435/pythonic-way-to-create-a-long-multi-line-string
   #
   columns = ','.join([t for t in c if t != column_name])
-  sql_statements = [ #'BEGIN TRANSACTION;',
-                    'CREATE TEMPORARY TABLE {table_name}_backup({columns});'.format(table_name=table_name, columns=columns),
+  sql_statements = ['CREATE TABLE {table_name}_backup({columns});'.format(table_name=table_name, columns=columns),
                     'INSERT INTO {table_name}_backup SELECT {columns} FROM {table_name};'.format(table_name=table_name, columns=columns),
                     'DROP TABLE {table_name};'.format(table_name=table_name),
                     'CREATE TABLE {table_name}({columns});'.format(table_name=table_name, columns=columns),
                     'INSERT INTO {table_name} SELECT {columns} FROM {table_name}_backup;'.format(table_name=table_name, columns=columns),
                     'DROP TABLE {table_name}_backup;'.format(table_name=table_name, columns=columns)]
-                    #'COMMIT;'.format(table_name=table_name, columns=columns)]
 
   try:
+    i = 1
     for sql in sql_statements:
+      # print '%s SQL statement %s' % (item('prompt_warn'), str(i))
       scraperwiki.sqlite.execute(sql)
+      scraperwiki.sqlite._State.new_transaction()
+      i += 1
 
   except Exception as e:
     print '%s Could not delete column `%s` from table `%s`.' % (item('prompt_error'), column_name, table_name)
@@ -116,7 +118,6 @@ def DeletePIIColumns(table_name, column_name, verbose=True):
   #
   # Close connection with database.
   #
-  scraperwiki.sqlite._State.new_transaction()
   return True
 
 

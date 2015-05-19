@@ -42,7 +42,7 @@ def StoreRecords(data, table, verbose=False, db_lock_time=None):
       delete_statement = "DELETE FROM %s" % table
       scraperwiki.sqlite.execute(delete_statement)
       scraperwiki.sqlite._State.new_transaction()  # closing connection
-      print "%s Cleaning %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
+      print "%s Deleting %s records from database table: %s" % (item('prompt_bullet').decode('utf-8'), old_records, table)
       
       #
       # Waiting to unlock database.
