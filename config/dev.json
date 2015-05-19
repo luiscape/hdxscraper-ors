@@ -41,7 +41,7 @@
     "long_name": "Country Framework with Targets",
     "url": "http://ors.ocharowca.info/datafeeds/frameworktargets.ashx?country=&cluster=&obj=&act=&admin1=&format=json",
     "table_name": "ors_frwtrg",
-    "pii_columns": [],
+    "pii_columns": ["CreatedBy"],
     "dates_formatting": {
         "type": "epoch",
         "fields": ["CreatedDate"]
@@ -267,10 +267,6 @@
     "url": "http://ors.ocharowca.info/DataFeeds/ReportedData.ashx?project=&country=&subcluster=&cluster=&org=&obj=&act=&ind=&month=&admin1=&lng=&format=json",
     "table_name": "ors_rpt",
     "pii_columns": [],
-    "dates_formatting": {
-        "type": null,
-        "fields": []
-    },
     "dates_formatting": {
         "type": "epoch",
         "fields": ["CreatedDate"]
