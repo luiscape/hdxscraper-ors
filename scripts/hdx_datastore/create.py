@@ -24,7 +24,7 @@ def LoadLocalJson(json_path, verbose=False):
   '''Loading resources from a local json file.'''
 
   try:
-    with open(json_path) as json_file:    
+    with open(json_path) as json_file:
       resources = json.load(json_file)
 
       #
@@ -44,10 +44,10 @@ def LoadLocalJson(json_path, verbose=False):
 
 
 def DownloadResourceFromHDX(ckan_url, file_name, resource_id, api_key, verbose = True):
-  '''Downloading a resource from CKAN based on its id. Resources need to be 
+  '''Downloading a resource from CKAN based on its id. Resources need to be
      downloaded in order to be correctly parsed by the CreateDatastore function.'''
 
-  
+
   print "%s Downloading resource file from HDX." % item('prompt_bullet')
   headers = { 'Authorization': api_key, 'user-agent': 'HDX-Script/v.0.1.0' }
 
@@ -60,9 +60,9 @@ def DownloadResourceFromHDX(ckan_url, file_name, resource_id, api_key, verbose =
   if doc['success'] is False:
     if verbose:
       print json.dumps(doc)
-    print '%s Failed to read resource.' % item('prompt_error') 
+    print '%s Failed to read resource.' % item('prompt_error')
     return False
-  
+
   else:
     resource_file_url = doc["result"]["url"]
 
@@ -95,15 +95,15 @@ def DownloadResourceFromHDX(ckan_url, file_name, resource_id, api_key, verbose =
 def DeleteDatastore(ckan_url, api_key, ckan_resource_id, verbose=False):
   '''Delete a CKAN DataStore.'''
 
-  # 
+  #
   # Configuring the remote CKAN instance.
   #
   ckan = ckanapi.RemoteCKAN(ckan_url, apikey=api_key)
-  
-       
+
+
   try:
     ckan.action.datastore_delete(resource_id=ckan_resource_id, force=True)
-  
+
   #
   # If DataStore doesn't exist
   # print warning, but let it pass.
@@ -128,7 +128,7 @@ def DefineSchema(file_name, verbose = False):
     print '%s There was an error reading resource.' % item('prompt_error')
     if verbose:
       print e
-  
+
   #
   # Building the schema.
   #
@@ -145,18 +145,18 @@ def DefineSchema(file_name, verbose = False):
 def CreateDatastore(ckan_url, api_key, json_path, resource_id, file_name, resource, verbose=False):
   '''Creating a CKAN DataStore.'''
 
-  # 
+  #
   # Configuring the remote CKAN instance.
   #
   ckan = ckanapi.RemoteCKAN(ckan_url, apikey=api_key)
 
   if DeleteDatastore(
-    ckan_url=ckan_url, 
-    api_key=api_key, 
+    ckan_url=ckan_url,
+    api_key=api_key,
     ckan_resource_id=resource_id) is False:
     return False
 
-  # 
+  #
   # Creating a DataStore.
   #
   ckan.action.datastore_create(
@@ -166,13 +166,13 @@ def CreateDatastore(ckan_url, api_key, json_path, resource_id, file_name, resour
     primary_key=resource['schema'].get('primary_key')
     )
 
-  # 
+  #
   # Reading CSV file and inserting data.
   #
   reader = csv.DictReader(open(file_name))
   rows = [ row for row in reader ]
 
-  # 
+  #
   # Hack for managing different encoding data.
   #
   if len(json_path) is 36:
@@ -186,7 +186,7 @@ def CreateDatastore(ckan_url, api_key, json_path, resource_id, file_name, resour
       row_encoded = { key:row[key].decode('utf-8') for key in row.keys() }
       rows_decoded.append(row_encoded)
 
-  # 
+  #
   # Sending N records at a time.
   #
   offset = 0
@@ -207,14 +207,14 @@ def CreateDatastore(ckan_url, api_key, json_path, resource_id, file_name, resour
 def CreateDatastoresFromResourceID(resource_id, system_arguments=False):
   '''Create a datastore from a resource ID. Either collect system arguments
      if run from the command line or do type-guessing for the creation of schemas
-     on the fly.'''  
+     on the fly.'''
 
   #
   # Fetching arguments and configuring the script.
   #
   if system_arguments:
     p = FetchSystemArguments()
-  
+
   #
   # Manual input of function parameters
   #
@@ -222,15 +222,15 @@ def CreateDatastoresFromResourceID(resource_id, system_arguments=False):
     p = {
       'json_path': resource_id,
       'prod_url': 'https://data.hdx.rwlabs.org/',
-      'download_temp_path': os.path.join('data', CreateRandomFileName(length=5, extension='.csv')),
+      'download_temp_path': os.path.join('tool', 'data', CreateRandomFileName(length=5, extension='.csv')),
       'api_key': LoadLocalJson(os.path.join(os.path.split(dir)[0], 'config', 'secrets.json'))['hdx_key']
     }
 
   api_key = p['api_key']
   ckan_url = p['prod_url']
   download_temp_path = p['download_temp_path']
-  
-  # 
+
+  #
   # Loading resource information.
   #
   if len(p['json_path']) is 36:  # length of resource ID.
@@ -250,14 +250,14 @@ def CreateDatastoresFromResourceID(resource_id, system_arguments=False):
 
     # Create datastore.
     CreateDatastore(
-        ckan_url=ckan_url, 
+        ckan_url=ckan_url,
         api_key=api_key,
         json_path=p['json_path'],
-        file_name=download_temp_path, 
-        resource_id=resource_id, 
+        file_name=download_temp_path,
+        resource_id=resource_id,
         resource=resources[0]
         )
-    
+
     #
     # Delete temporary file.
     #
@@ -267,7 +267,7 @@ def CreateDatastoresFromResourceID(resource_id, system_arguments=False):
   else:
     resources = LoadLocalJson(p['json_path'])
 
-    # 
+    #
     # Iterating over each resource provided.
     #
     for r in resources:
@@ -282,15 +282,15 @@ def CreateDatastoresFromResourceID(resource_id, system_arguments=False):
           api_key=api_key
           )
         CreateDatastore(
-          ckan_url=ckan_url, 
-          api_key=api_key, 
+          ckan_url=ckan_url,
+          api_key=api_key,
           json_path=p['json_path'],
-          file_name=download_temp_path, 
-          resource_id=resource_id, 
+          file_name=download_temp_path,
+          resource_id=resource_id,
           resource=r
           )
 
-    
+
 
       except Exception as e:
         print '%s DataStore creation failed.' % item('prompt_error')
