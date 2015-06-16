@@ -7,7 +7,7 @@ source venv/bin/activate
 cd tool
 
 pip install -r requirements.txt
-pip install[secturity]
+pip install[security]
 
 printf "Setting-up database.\n"
 python scripts/setup/
