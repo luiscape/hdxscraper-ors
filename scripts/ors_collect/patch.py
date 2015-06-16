@@ -18,7 +18,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
   '''Convert timestamps from /Date(1420449209053)/ to 2015-01-05T09:13:29'''
 
   print '%s Cleaning epoch dates for table `%s` and field `%s`.' % (item('prompt_bullet').decode('utf-8'), table_name, column_name)
-  
+
   #
   # Collect data from database.
   #
@@ -34,7 +34,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
     return False
     if verbose:
       print e
-  
+
   #
   # Converting dates.
   #
@@ -53,7 +53,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
         if verbose:
           print e
         return False
-    
+
     #
     # Making transformations.
     #
@@ -66,16 +66,16 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
     date[column_name] = iso_format
 
   #
-  # Return data.
+  # Store data.
   #
-  return data
-  
+  StoreRecords(data=data, table=endpoint['table_name'])
+
 
 def DeletePIIColumns(table_name, column_name, verbose=True):
   '''Deleting columns that contain personal identifiable information.'''
 
   print '%s Deleting PII column `%s` on table `%s`.' % (item('prompt_bullet').decode('utf-8'), column_name, table_name)
-  
+
   #
   # Fetch keys from column in database.
   #
@@ -114,7 +114,7 @@ def DeletePIIColumns(table_name, column_name, verbose=True):
     if verbose:
       print e
     return False
-   
+
   #
   # Close connection with database.
   #
@@ -124,7 +124,7 @@ def DeletePIIColumns(table_name, column_name, verbose=True):
 
 def Main(verbose=True):
   '''Wrapper.'''
-  
+
   #
   # Load endpoint info from config
   # and iterate over them.
@@ -142,16 +142,13 @@ def Main(verbose=True):
     # Check the type of date conversion.
     #
     if endpoint['dates_formatting']['type'] == 'epoch':
+
       #
       # Iterate over every field.
       #
       for field in endpoint['dates_formatting']['fields']:
-        data = ConvertEpochDates(endpoint['table_name'], column_name=field)
-        #
-        # Store data in database.
-        #
-        if data is not False:
-          StoreRecords(data=data, table=endpoint['table_name'])
+        ConvertEpochDates(endpoint['table_name'], column_name=field)
+
 
 
 
