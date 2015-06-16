@@ -68,7 +68,7 @@ def ConvertEpochDates(table_name, column_name, verbose=False):
   #
   # Store data.
   #
-  StoreRecords(data=data, table=endpoint['table_name'])
+  StoreRecords(data=data, table=table_name)
 
 
 def DeletePIIColumns(table_name, column_name, verbose=True):
