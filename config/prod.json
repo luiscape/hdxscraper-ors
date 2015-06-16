@@ -319,7 +319,7 @@
     "long_name": "Cluster output indicator Reports",
     "url": "http://ors.ocharowca.info/datafeeds/clusterindicatorreports.ashx?country=&cluster=&month=&lng=&regional=&format=json",
     "table_name": "ors_clindrpt",
-    "pii_columns": ["CreatedBy"],
+    "pii_columns": ["CreatedBy", "UpdatedBy"],
     "dates_formatting": {
         "type": "epoch",
         "fields": ["CreatedDate", "UpdatedDate"]
