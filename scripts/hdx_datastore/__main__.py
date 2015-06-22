@@ -13,6 +13,7 @@ from hdx_datastore.create import CreateDatastoresFromResourceID
 
 def Main():
   '''Wrapper.'''
+
   resource_ids = [
     '68788137-84d6-4e9d-87f1-f23f71ec705f',
     '89a28fad-a862-4133-82cd-9ef5f1938f38',
@@ -24,7 +25,7 @@ def Main():
     '831ef44b-d7eb-4c03-b152-ce5dce174626',
     '860fd6e4-589b-49c0-b1cf-fb9c0528d391'
   ]
-  
+
   i = 1
   for resource_id in resource_ids:
     print '%s Creating HDX DataStore %s / %s' % (item('prompt_bullet'), str(i), str(len(resource_ids)))
